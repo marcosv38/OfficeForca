@@ -1,22 +1,92 @@
-
-
-:root{
+:root {
     --bg-color: #0C0C0C;
     --cor-primária: #481E14;
     --cor-secundária: #9B3922;
     --cor-terciaria: #F2613F;
 }
 
-body{
-    background: var(--bg-color);
+body {
+    background: var(--cor-primária);
+}
+
+.principal{
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
 
 
+/*--------------------Header-----------------------------*/
+
+.game__header{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.game__header__icon{
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+}
+
+.game-titulo{
+    font-size: 3rem;
+    
+}
+
+/*--------------------corpo do jogo-----------------------------*/
+
+.container-game{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    border-radius: 50px;
+}
+
+
+.game__imagem{
+    width: 30%;
+    align-self: center;
+}
+
+.game__palavras{
+    width: 50%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.game__imagem-estado{
+    width: 100%;
+    height: auto;
+
+}
+
+
+.game__palavras__letras{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+}
 
 
 /*--------------------------------Botões--------------------------------------------*/
 
-/* From Uiverse.io by njesenberger */ 
 .button {
     -webkit-appearance: none;
     appearance: none;
@@ -28,9 +98,9 @@ body{
     background: transparent;
     font: inherit;
     cursor: pointer;
-  }
-  
-  .button-top {
+}
+
+.button-top {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,13 +115,13 @@ body{
     transition-duration: .2s;
     -webkit-user-select: none;
     user-select: none;
-  }
-  
-  .button:active .button-top {
+}
+
+.button:active .button-top {
     transform: translateY(6px);
-  }
-  
-  .button-top::after {
+}
+
+.button-top::after {
     content: '';
     position: absolute;
     z-index: -1;
@@ -65,15 +135,15 @@ body{
     box-shadow: inset 0 0 0px 1px rgba(255, 255, 255, .2), 0 1px 2px 1px rgba(255, 255, 255, .2);
     transition-property: border-radius, padding, width, transform;
     transition-duration: .2s;
-  }
-  
-  .button:active .button-top::after {
+}
+
+.button:active .button-top::after {
     border-radius: 6px;
     padding: 0 2px;
     background-image: radial-gradient(#9B3922, #F2613F);
-  }
-  
-  .button-bottom {
+}
+
+.button-bottom {
     position: absolute;
     z-index: -1;
     bottom: 4px;
@@ -88,14 +158,14 @@ body{
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5), inset 0 -1px 3px 3px rgba(0, 0, 0, .4);
     transition-property: border-radius, padding-top;
     transition-duration: .2s;
-  }
-  
-  .button:active .button-bottom {
+}
+
+.button:active .button-bottom {
     border-radius: 10px 10px 8px 8px / 8px;
     padding-top: 0;
-  }
-  
-  .button-base {
+}
+
+.button-base {
     position: absolute;
     z-index: -2;
     top: 4px;
@@ -105,4 +175,32 @@ body{
     height: calc(100% - 4px);
     background-color: rgba(0, 0, 0, .15);
     box-shadow: 0 1px 1px 0 rgba(255, 255, 255, .75), inset 0 2px 2px rgba(0, 0, 0, .25);
-  }
+}
+
+
+
+/*--------------------------------Letras--------------------------------------------*/
+
+
+.brutalist-card {
+    width: 3rem;
+    height: 4rem;
+    border: 4px solid #000;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 10px 10px 0 #000;
+    font-family: "Arial", sans-serif;
+}
+
+
+.brutalist-card__message {
+    color: #000;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 1.4;
+    font-weight: 600;
+    
+}
+
+
+
