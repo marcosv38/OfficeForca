@@ -3,73 +3,195 @@
     --cor-primária: #481E14;
     --cor-secundária: #9B3922;
     --cor-terciaria: #F2613F;
+    --cor-texto-secundario: #FFF;
 }
 
 body {
     background: var(--cor-primária);
+    font-family: "Roboto", sans-serif;
+    height: 100vh;
 }
 
 .principal{
     width: 80%;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
-    justify-content: center;
     margin: auto;
+    margin-top: 2rem;
 }
 
+/*--------------------card de mensagem------------------------*/
+
+.mensagens{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0,0.7);
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.display__hidden{
+    display: none;
+}
+
+.mensagens__container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: auto;
+    align-self: center;
+    background: var(--cor-secundária);
+    border-radius: 2rem;
+}
+
+.mensagens__container-mensagem{
+    overflow: auto;
+}
+
+.mensagens__container__texto{
+    height: 50%;
+    font-weight: 500;
+    padding: 2rem;
+    text-wrap: wrap;
+    color: var(--cor-texto-secundario);
+    font-size: min(6vw, 28px);
+}
+
+hr{
+    width: 95%;
+}
+
+.mensagens__container__footer{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+   text-align: center;
+}
+
+.mensagens__container__footer__temporizador{
+    padding: 1rem;
+    border: none;
+    border-radius: 30px 0 0 30px;
+}
+
+.mensagens__container__footer__submit{
+    padding: 1rem;
+    background: var(--cor-terciaria);
+    border-radius: 0 30px 30px 0;
+    text-decoration: none;
+    color:var(--cor-texto-secundario);
+}
+
+
+
+.botoes{
+    width: 100%;
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
 
 /*--------------------Header-----------------------------*/
 
 .game__header{
     display: flex;
-    width: 100%;
-    flex-direction: column;
+    width: 80%;
     align-items: center;
-    justify-content: center;
     text-align: center;
     padding: 1rem;
     gap: 1rem;
+    background: var(--cor-secundária);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    justify-content: center;
+    margin: auto;
+}
+
+.game__header__resumo{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .game__header__icon{
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     margin-right: 1rem;
-}
-
-.game-titulo{
-    font-size: 3rem;
+    align-self: center;
     
 }
 
+.game-titulo{
+    font-size: 2.5rem;
+    font-family: "Matemasie", sans-serif;
+    font-weight: 400;
+    color: var(--cor-terciaria);
+}
+
+
+.game-temporizador, .game-score{
+    font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--cor-terciaria);
+}
 /*--------------------corpo do jogo-----------------------------*/
 
 .container-game{
     width: 100%;
-    height: 80vh;
+    height: 60vh;
     display: flex;
-    border-radius: 50px;
 }
 
 
 .game__imagem{
-    width: 30%;
-    align-self: center;
+    width: 40%;
+    height: 60vh;
+    align-self: top;
+    background: var(--cor-terciaria);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 .game__palavras{
-    width: 50%;
-    height: 100%;
+    width: 60%;
+    height: 60vh;
     padding: 1rem;
+    background: var(--cor-secundária);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    
+}
+
+.game__palavras__categorias{
+    align-self: center;
+    color: var(--cor-primária);
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
 .game__imagem-estado{
-    width: 100%;
+    width: 95%;
+    max-width: 420px;
     height: auto;
-
+    margin: auto;
+    
 }
 
 
@@ -81,7 +203,12 @@ body {
     justify-content: center;
     align-items: center;
     column-gap: 1rem;
-    flex-wrap: wrap;
+   flex-wrap: wrap;
+   gap: 1rem;
+}
+
+.game__palavras__letras-container{
+    flex-shrink: 2;
 }
 
 
@@ -153,7 +280,6 @@ body {
     width: calc(100% - 8px);
     height: calc(100% - 10px);
     box-sizing: content-box;
-    background-color: #803;
     background-image: radial-gradient(4px 8px at 4px calc(100% - 8px), rgba(255, 255, 255, .25), transparent), radial-gradient(4px 8px at calc(100% - 4px) calc(100% - 8px), rgba(255, 255, 255, .25), transparent), radial-gradient(16px at -4px 0, white, transparent), radial-gradient(16px at calc(100% + 4px) 0, white, transparent);
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5), inset 0 -1px 3px 3px rgba(0, 0, 0, .4);
     transition-property: border-radius, padding-top;
@@ -178,13 +304,17 @@ body {
 }
 
 
+.botoes-active{
+    transform: translateY(6px);
+    background-image: radial-gradient(#9B3922, #F2613F);
+}
 
 /*--------------------------------Letras--------------------------------------------*/
 
 
 .brutalist-card {
-    width: 3rem;
-    height: 4rem;
+    width: 3vw;
+    height: 4vw;
     border: 4px solid #000;
     background-color: #fff;
     padding: 1rem;
@@ -196,11 +326,80 @@ body {
 .brutalist-card__message {
     color: #000;
     text-align: center;
-    font-size: 3rem;
+    font-size: 4vw;
     line-height: 1.4;
-    font-weight: 600;
+    font-weight: 700;
     
 }
 
 
 
+/*--------------------------------------Tela de Celular---------------------------------*/
+
+@media (max-width: 768px){
+    .container-game{
+        height: 60vh;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        margin-top: 8vh;
+        margin-bottom: 8vh;
+    }
+
+    .game__imagem{
+        width: 100%;
+        height: 90%;
+        align-self: center;
+        background: var(--cor-terciaria);
+        border-radius: 0px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        padding: 0 1rem 0 1rem;
+        text-align: center;
+    }
+    
+    .game__imagem-estado{
+        max-width: 310px;
+    }
+
+    .game__palavras{
+        width: 100%;
+        height: 40%;
+        align-self: center;
+        padding: 2rem 1rem 3rem 1rem;
+        background: var(--cor-secundária);
+        border-radius: 0px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    .botoes{
+        width: 100vw;
+        display: flex;
+        gap: 1rem;
+       flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+
+
+    /*----------------- head ---------------------*/
+   
+    .game__header__icon{
+        margin-left: 1rem;
+    }
+    
+    .game-titulo{
+        font-size: 2rem;
+    }
+
+    
+/*--------------------card de mensagem------------------------*/
+
+.mensagens__container{
+    
+    width: 90%;
+    height: auto;   
+}
+
+}
