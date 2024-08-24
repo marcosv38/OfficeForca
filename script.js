@@ -281,6 +281,7 @@ const contagemRegressiva = () => {
     if (tempoDeJogo <= 0) {
         alert(`Tempo finalizado!! Sua Pontuação foi ${pontuacao}`);
         clearInterval(intervaloContador);
+        location.reload();
         return
     }
     tempoDeJogo -= 1;
@@ -437,6 +438,7 @@ function validarLetra(chute) {
         console.log(contagemPalavras + "-" + letrasAtivas.length);
         if (contagemPalavras === letrasAtivas.length) {
             acertouPalavra();
+            contagemPalavras = 0;
         }
 
 
@@ -471,10 +473,15 @@ function verificarErros(letraErrada) {
 //função de acerto de palavra
 function acertouPalavra() {
     palavraAtiva++;
-    erros--;
-    console.log(palavrasSelecionadas[palavraAtiva].escrita);
-    const imagemJogo = document.querySelector('.game__imagem-estado');
-    imagemJogo.setAttribute('src', "/imagens/Error" + erros + ".png");
+    if(erros>1){
+        erros--;
+        const imagemJogo = document.querySelector('.game__imagem-estado');
+        imagemJogo.setAttribute('src', "/imagens/Error" + erros + ".png");
+    }else if(erros===1){
+        erros--;
+        const imagemJogo = document.querySelector('.game__imagem-estado');
+        imagemJogo.setAttribute('src', "/imagens/startGame.png");
+    }
     pontuacao += 100;
     pontuacaoLabel.textContent = `Placar: ${pontuacao}`;
 
