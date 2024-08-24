@@ -237,8 +237,50 @@ const palavras = [{
     "dificuldade": "Difícil",
     "categoria": "Relacionado à cultura"
 }];
-const elementoChute = document.getElementById('chute');
 
+/*--------------Variáveis de seleção de jogo----------------*/
+const inputTemporizador = document.querySelector('.mensagens__container__footer__temporizador');
+const buttonTemporizador = document.querySelector('.mensagens__container__footer__submit');
+const buttonFacil = document.getElementById("Fácil");
+const buttonMedio = document.getElementById("Médio");
+const buttonDificil = document.getElementById("Difícil");
+let tempoDeJogo = 0;
+let dificuldadeDoJogo = "";
+const btTop = document.querySelectorAll(".button-top");
+const btBottom = document.querySelectorAll(".button-bottom");
+
+/*------------- seleção de dificuldade e tempo de jogo------------*/
+
+//Função de escolha de dificuldade
+buttonFacil.addEventListener('click', (evento)=>{
+    dificuldadeDoJogo="Fácil";
+    ativarBotoes(btTop[0],btBottom[0]);
+});
+
+buttonMedio.addEventListener('click', (evento)=>{
+    dificuldadeDoJogo="Médio";
+    ativarBotoes(btTop[1],btBottom[1]);
+});
+
+buttonDificil.addEventListener('click', (evento)=>{
+    dificuldadeDoJogo="Difícil";
+    ativarBotoes(btTop[2],btBottom[2]);
+});
+
+//Função de troca de estilos do botão ativo
+function ativarBotoes(btTop,btBottom){
+    //Tirar o estilo de ativo do botão selecionado
+    const ativos = document.querySelectorAll('.botoes-active');
+    ativos.forEach((item)=>{
+        item.classList.remove('botoes-active');
+    });
+    btTop.classList.add("botoes-active");   
+    btBottom.classList.add("botoes-active");   
+}
+
+
+
+/*----------Reconhecimento de voz-----------------*/
 window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -256,4 +298,3 @@ function onSpeak(e){
 function exibeChute(chute){
     console.log(chute);
 }
-
