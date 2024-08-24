@@ -257,6 +257,8 @@ let intervaloContador = null;
 let palavrasSelecionadas = [];
 let palavraAtiva = "";
 let erros = 0;
+let contagemPalavras = 0;
+const pontuacaoLabel = document.querySelector('.game-score');
 /*-----------------Reconhecimento de voz-----------------*/
 window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -304,14 +306,14 @@ function selecionarPlavras() {
 // Função para randomizar array
 function shuffleArray(arr) {
     // Loop em todos os elementos
-for (let i = arr.length - 1; i > 0; i--) {
+    for (let i = arr.length - 1; i > 0; i--) {
         // Escolhendo elemento aleatório
-    const j = Math.floor(Math.random() * (i + 1));
-    // Reposicionando elemento
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-}
-// Retornando array com aleatoriedade
-return arr;
+        const j = Math.floor(Math.random() * (i + 1));
+        // Reposicionando elemento
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    // Retornando array com aleatoriedade
+    return arr;
 }
 
 
@@ -319,6 +321,7 @@ return arr;
 function sortearPalavra() {
     palavrasSelecionadas = shuffleArray(palavrasSelecionadas);
     palavraAtiva = 0;
+    console.log(palavrasSelecionadas[palavraAtiva].escrita);
 }
 
 //colocar letras no espaço de palavras
@@ -328,7 +331,7 @@ function distribuirLetras() {
     letras.forEach((elemento) => { elemento.remove(); });
 
     //insere a quantidade de letras da palavra no jogo
-    for (let i=0; i < palavrasSelecionadas[palavraAtiva].escrita.length; i++) {
+    for (let i = 0; i < palavrasSelecionadas[palavraAtiva].escrita.length; i++) {
         containerLetras.innerHTML += `
             <li class="game__palavras__letras-container">
                 <div class="brutalist-card">
@@ -348,7 +351,7 @@ function distribuirLetras() {
 function iniciar() {
     intervaloContador = setInterval(contagemRegressiva, 1000);
     selecionarPlavras();
-    sortearPalavra();  //Selecionando primeira palavra do jogo
+    sortearPalavra();
     distribuirLetras();
 }
 
@@ -407,16 +410,19 @@ buttonTemporizador.addEventListener('click', (evento) => {
 //validando letra falada
 function validarLetra(chute) {
     const letrasAtivas = document.querySelectorAll(".brutalist-card__message");
-    
-    if(chute.toLowerCase()==="terminar"){
+
+    if (chute.toLowerCase() === "terminar") {
         alert(`O jogo acabou!! Sua Pontuação foi: ${pontuacao}`);
         location.reload();
-    }else if(chute.match(/letra/)){
-        const letraExtraida = chute.charAt(chute.length-1);
-        const letraErrada = true;
-        for(let i=0;i<palavrasSelecionadas[palavraAtiva].escrita.length;i++){
+    } else if (chute.match(/letra/)) {
+
+        const letraExtraida = chute.charAt(chute.length - 1);
+        let letraErrada = true;
+
+        //Verificando cada letra para ver se foi acertada e por no lugar
+        for (let i = 0; i < palavrasSelecionadas[palavraAtiva].escrita.length; i++) {
             const letraSemAcento = palavrasSelecionadas[palavraAtiva].escrita.charAt(i).normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
-            if(letraExtraida.toLowerCase()===letraSemAcento.toLowerCase()){
+            if (letraExtraida.toLowerCase() === letraSemAcento.toLowerCase()) {
                 letrasAtivas[i].textContent = palavrasSelecionadas[palavraAtiva].escrita.charAt(i);
                 letraErrada = false;
             }
@@ -424,30 +430,57 @@ function validarLetra(chute) {
 
         verificarErros(letraErrada);
 
-    }else if(chute.toLowerCase()===palavrasSelecionadas[palavraAtiva].escrita.toLowerCase()){
-
-        for(let i=0;i<palavrasSelecionadas[palavraAtiva].escrita.length;i++){
-            letrasAtivas[i].textContent = palavrasSelecionadas[palavraAtiva].escrita.charAt(i);
+        if (!letraErrada) {
+            contagemPalavras++;
         }
 
-    }else {
+        console.log(contagemPalavras + "-" + letrasAtivas.length);
+        if (contagemPalavras === letrasAtivas.length) {
+            acertouPalavra();
+        }
+
+
+    } else if (chute.toLowerCase() === palavrasSelecionadas[palavraAtiva].escrita.toLowerCase()) {
+
+        for (let i = 0; i < palavrasSelecionadas[palavraAtiva].escrita.length; i++) {
+            letrasAtivas[i].textContent = palavrasSelecionadas[palavraAtiva].escrita.charAt(i);
+        }
+        acertouPalavra();
+    } else {
         alert("Letra inválida");
     }
 }
 
 
 //verificação para caso a letra esteja errada
-function verificarErros(letraErrada){
-    if(letraErrada){
+function verificarErros(letraErrada) {
+    if (letraErrada) {
         erros++;
         const imagemJogo = document.querySelector('.game__imagem-estado');
-        if(erros<4){
-            imagemJogo.setAttribute('src',"/imagens/Error"+erros+".png");
-        }else if(erros===4){
-            imagemJogo.setAttribute('src',"/imagens/GameOver.png");
-        }else{
+        if (erros < 4) {
+            imagemJogo.setAttribute('src', "/imagens/Error" + erros + ".png");
+        } else if (erros === 4) {
+            imagemJogo.setAttribute('src', "/imagens/GameOver.png");
+        } else {
             alert(`O jogo acabou!! Você errou 5 vezes. Sua Pontuação foi: ${pontuacao}`);
             location.reload();
         }
     }
+}
+
+//função de acerto de palavra
+function acertouPalavra() {
+    palavraAtiva++;
+    erros--;
+    console.log(palavrasSelecionadas[palavraAtiva].escrita);
+    const imagemJogo = document.querySelector('.game__imagem-estado');
+    imagemJogo.setAttribute('src', "/imagens/Error" + erros + ".png");
+    pontuacao += 100;
+    pontuacaoLabel.textContent = `Placar: ${pontuacao}`;
+
+    if (palavraAtiva === 20) {
+        alert(`Parabéns, o jogo acabou!! Você acertou todas as palavras. Sua Pontuação total é de ${pontuacao} pontos!`);
+        location.reload();
+    }
+    distribuirLetras();
 }
