@@ -270,7 +270,6 @@ recognition.addEventListener('result', onSpeak);
 
 function onSpeak(e) {
     chute = e.results[0][0].transcript;
-    console.log(chute);
     validarLetra(chute);
 }
 
@@ -322,7 +321,6 @@ function shuffleArray(arr) {
 function sortearPalavra() {
     palavrasSelecionadas = shuffleArray(palavrasSelecionadas);
     palavraAtiva = 0;
-    console.log(palavrasSelecionadas[palavraAtiva].escrita);
 }
 
 //colocar letras no espaço de palavras
@@ -435,7 +433,6 @@ function validarLetra(chute) {
             contagemPalavras++;
         }
 
-        console.log(contagemPalavras + "-" + letrasAtivas.length);
         if (contagemPalavras === letrasAtivas.length) {
             acertouPalavra();
         }
