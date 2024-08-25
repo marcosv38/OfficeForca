@@ -396,7 +396,7 @@ buttonTemporizador.addEventListener('click', (evento) => {
             alert("Por favor, selecione a dificuldade da partida!!!");
         } else {
             document.querySelector('.mensagens').classList.add("display__hidden");//escondendo caixa de dialogo incial
-            alert("O jogo irá começar!!! Para adicionar letras você pode falar letra por letra até completar a palavra ou falar a palavra completa se já souber.");
+            alert("O jogo está prestes a começar! Para adicionar letras, diga 'Letra' seguido da letra desejada, por exemplo, 'Letra A', até formar a palavra completa. Se preferir, você também pode dizer a palavra inteira de uma vez, se já souber. Boa sorte e divirta-se!");
             recognition.start();//iniciar reconhecimento de voz
             tempoDeJogo = inputTemporizador.value; //inserindo tempo de jogo
             mostrarTempo();
@@ -486,7 +486,7 @@ function acertouPalavra() {
     pontuacaoLabel.textContent = `Placar: ${pontuacao}`;
 
     if (palavraAtiva === 20) {
-        alert(`Parabéns, o jogo acabou!! Você acertou todas as palavras. Sua Pontuação total é de ${pontuacao} pontos!`);
+        alert(`Parabéns, o jogo acabou!! Você acertou todas as 20 palavras. Sua Pontuação total é de ${pontuacao} pontos!`);
         location.reload();
     }
     distribuirLetras();
