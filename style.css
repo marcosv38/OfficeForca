@@ -34,10 +34,6 @@ body {
     flex-direction: column;
 }
 
-.display__hidden{
-    display: none;
-}
-
 .mensagens__container{
     margin: auto;
     display: flex;
@@ -47,6 +43,10 @@ body {
     align-self: center;
     background: var(--cor-secundária);
     border-radius: 2rem;
+}
+
+.display__hidden{
+    display: none;
 }
 
 .mensagens__container-mensagem{
@@ -97,6 +97,43 @@ hr{
     gap: 4rem;
     justify-content: center;
     margin-bottom: 3rem;
+}
+
+
+/*--------------------Congrats---------------------------*/
+.comemoracao{
+    display: flex;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+}
+
+.comemoracao__imagem{
+    height: 25vw;
+    width: 25vw;
+}
+
+.esquerda{
+    position: fixed;
+    left: 0%;
+    bottom: 0%;
+}
+
+.direita{
+    position: fixed;
+    right: 0%;
+    bottom: 0%;
+    transform: scale(-1, 1);
+}
+
+.comemoracao__titulo{
+    margin: auto;
+    font-size: 10vw;
+    font-family: "Matemasie", sans-serif;
+    font-weight: bold;
+    color: black;
+    -webkit-text-stroke: 1px white;
 }
 
 /*--------------------Header-----------------------------*/
@@ -153,6 +190,28 @@ hr{
     display: flex;
 }
 
+.lifePoints{
+    display: flex;
+    width: 100%;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vh;
+    margin-top: 0.5vh;
+}
+
+.lifePoint{
+    width: 4vh;
+    height: 4vh;
+    gap: 0.5vh;
+}
+
+.lifePoints__sub{
+    font-size: 3vh;
+    color: var(--cor-primária);
+    font-family: "Jersey 10", sans-serif;
+}
+
 .game__imagem{
     width: 40%;
     height: 60vh;
@@ -162,7 +221,8 @@ hr{
     border-bottom-right-radius: 20px;
     padding: 1rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .game__palavras{
@@ -185,7 +245,7 @@ hr{
 }
 
 .game__imagem-estado{
-    width: 95%;
+    width: 85%;
     max-width: 420px;
     height: auto;
     margin: auto;
@@ -354,6 +414,7 @@ hr{
         border-bottom-right-radius: 20px;
         padding: 0 1rem 0 1rem;
         text-align: center;
+        overflow: visible;
     }
     
     .game__imagem-estado{
@@ -400,4 +461,11 @@ hr{
     height: auto;   
 }
 
+/*-----------------------comemoração--------------------------*/
+.comemoracao__imagem{
+    height: 40vw;
+    width: 40vw;
 }
+
+}
+

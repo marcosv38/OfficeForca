@@ -259,6 +259,9 @@ let palavraAtiva = "";
 let erros = 0;
 let contagemPalavras = 0;
 const pontuacaoLabel = document.querySelector('.game-score');
+const congrats = document.querySelector('.comemoracao');
+const lifepoints = document.querySelectorAll('.lifePoint');
+
 /*-----------------Reconhecimento de voz-----------------*/
 window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -434,16 +437,22 @@ function validarLetra(chute) {
         }
 
         if (contagemPalavras === letrasAtivas.length) {
-            acertouPalavra();
+            congrats.setAttribute("style", "display:flex");
+            setTimeout(() => {
+                acertouPalavra();
+            }, 2000);
         }
 
 
     } else if (chute.toLowerCase() === palavrasSelecionadas[palavraAtiva].escrita.toLowerCase()) {
-
+        congrats.setAttribute("style", "display:flex");
         for (let i = 0; i < palavrasSelecionadas[palavraAtiva].escrita.length; i++) {
             letrasAtivas[i].textContent = palavrasSelecionadas[palavraAtiva].escrita.charAt(i);
         }
-        acertouPalavra();
+        setTimeout(() => {
+            acertouPalavra();
+        }, 2000);
+
     } else {
         alert("Letra inválida");
     }
@@ -454,6 +463,7 @@ function validarLetra(chute) {
 function verificarErros(letraErrada) {
     if (letraErrada) {
         erros++;
+        contagemVidas();
         const imagemJogo = document.querySelector('.game__imagem-estado');
         if (erros < 4) {
             imagemJogo.setAttribute('src', "/imagens/Error" + erros + ".png");
@@ -469,12 +479,14 @@ function verificarErros(letraErrada) {
 //função de acerto de palavra
 function acertouPalavra() {
     palavraAtiva++;
+    congrats.setAttribute("style", "display:none");
+
     contagemPalavras = 0;
-    if(erros>1){
+    if (erros > 1) {
         erros--;
         const imagemJogo = document.querySelector('.game__imagem-estado');
         imagemJogo.setAttribute('src', "/imagens/Error" + erros + ".png");
-    }else if(erros===1){
+    } else if (erros === 1) {
         erros--;
         const imagemJogo = document.querySelector('.game__imagem-estado');
         imagemJogo.setAttribute('src', "/imagens/startGame.png");
@@ -486,6 +498,21 @@ function acertouPalavra() {
         alert(`Parabéns, o jogo acabou!! Você acertou todas as 20 palavras. Sua Pontuação total é de ${pontuacao} pontos!`);
         location.reload();
     }
-    
+    contagemVidas();
     distribuirLetras();
+}
+
+
+//Contagem de corações
+function contagemVidas() {
+
+    lifepoints.forEach((item) => {
+        item.classList.remove("display__hidden");
+    });
+
+    for (let i = 0; i < erros; i++) {
+        lifepoints[i].classList.add("display__hidden");
+    }
+
+
 }
