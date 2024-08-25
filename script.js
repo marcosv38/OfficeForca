@@ -438,7 +438,6 @@ function validarLetra(chute) {
         console.log(contagemPalavras + "-" + letrasAtivas.length);
         if (contagemPalavras === letrasAtivas.length) {
             acertouPalavra();
-            contagemPalavras = 0;
         }
 
 
@@ -473,6 +472,7 @@ function verificarErros(letraErrada) {
 //função de acerto de palavra
 function acertouPalavra() {
     palavraAtiva++;
+    contagemPalavras = 0;
     if(erros>1){
         erros--;
         const imagemJogo = document.querySelector('.game__imagem-estado');
@@ -489,5 +489,6 @@ function acertouPalavra() {
         alert(`Parabéns, o jogo acabou!! Você acertou todas as 20 palavras. Sua Pontuação total é de ${pontuacao} pontos!`);
         location.reload();
     }
+    
     distribuirLetras();
 }
